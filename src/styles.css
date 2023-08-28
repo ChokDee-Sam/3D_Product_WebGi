@@ -31,7 +31,8 @@ body {
 #webgi-canvas-container {
   width: 100vw;
   height: 100vh;
-  pointer-events: none;
+  /* pour éviter les mouvements 3D afin de pouvoir scroller */
+  /* pointer-events: none; */
   position: fixed;
   display: flex;
   justify-content: flex-end;
