@@ -1,18 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>WebGi starter</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,500;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-	<title>WebGi starter</title>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-</head>
+  <!---------- 		---------->
+  <!---------- Body ---------->
+  <!---------- 		---------->
 
-<body>
-	<div id="webgi-canvas-container">
-		<canvas id="webgi-canvas"></canvas>
-	</div>
+  <body>
+    <!---------- Navigation ---------->
+    <nav class="nav--bar">
+      <img class="logo" src="assets/logo.svg" />
+      <button class="button--navbar">BUY NOW</button>
+    </nav>
 
-	<script src="src/index.ts" type="module"></script>
-</body>
+    <!----------  Conteneur ---------->
+    <div class="container">
+      <!----------  Section 1 ---------->
+      <section class="section first">
+        <div class="section--one--container">
+          <h1>Perfect Drill</h1>
+          <p>
+            Variable speed for ultimate fingertip control for all drilling
+            applications. Reverse brush system for full torque and power in
+            forward and reverse, lock-on button for continuous use.
+          </p>
+          <button class="button--hero">KNOW MORE</button>
+        </div>
+      </section>
 
+      <!---------- Section 2 ---------->
+      <section class="section second">
+        <div class="section--two--container">
+          <h2>Comfortable to use</h2>
+          <p>
+            Ergonomic reversible hammer drill design with optimal grip
+            positions, light weight and insulated shock proof plastic body, easy
+            to change bits
+          </p>
+        </div>
+        <div class="custom--bg"></div>
+      </section>
+
+      <!---------- Section 3 ---------->
+      <section class="section third">
+        <div class="section--third--container">
+          <h2>Wood and metal</h2>
+          <p>
+            Supports wood and metal drilling. Metal drill bits are not part of
+            the included components with the product. Metal drill bits can be
+            procured by the customer and can be used for drilling into metal
+            surfaces
+          </p>
+          <!-- <button class="button--customize">CUSTOMIZE</button> -->
+        </div>
+      </section>
+
+      <!---------- Footer ---------->
+      <footer>
+        <button class="button--footer">BACK TO TOP</button>
+      </footer>
+    </div>
+
+    <!---------- 3D WebGl ---------->
+    <div id="webgi-canvas-container">
+      <canvas id="webgi-canvas"></canvas>
+    </div>
+
+    <script src="src/index.ts" type="module"></script>
+  </body>
 </html>
