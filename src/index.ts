@@ -50,6 +50,12 @@ async function setupViewer() {
   // ---------- Add some plugins ----------
   const manager = await viewer.addPlugin(AssetManagerPlugin);
 
+  //
+  const camera = viewer.scene.activeCamera;
+  const position = camera.position;
+  const target = camera.target;
+  //
+
   // ---------- Add a popup(in HTML) ----------
   // with download progress when any asset is downloading.
   await viewer.addPlugin(AssetManagerBasicPopupPlugin);
@@ -89,7 +95,20 @@ async function setupViewer() {
   const uiPlugin = await viewer.addPlugin(TweakpaneUiPlugin);
   // Add plugins to the UI to see their settings.
   uiPlugin.setupPlugins<IViewerPlugin>(TonemapPlugin, CanvasSnipperPlugin);
+
+  //
+  function setupScrollanimation() {
+    const tl = gsap.timeline();
+
+    // first section
+    tl.to(position, { x: 5, scrollTrigger: { trigger: "second" } });
+  }
 }
+
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
+
+// ---------- Add plugins individually ----------
 
 // -----------------------------------------------------------------
 // Appel de la fonction

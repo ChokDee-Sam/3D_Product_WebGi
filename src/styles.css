@@ -32,7 +32,7 @@ body {
   width: 100vw;
   height: 100vh;
   /* pour éviter les mouvements 3D afin de pouvoir scroller */
-  /* pointer-events: none; */
+  pointer-events: none;
   position: fixed;
   display: flex;
   justify-content: flex-end;
