@@ -100,9 +100,157 @@ async function setupViewer() {
   function setupScrollanimation() {
     const tl = gsap.timeline();
 
+    // FIRST SECTION
+
+    //   tl.to(position, {
+    //     x: -3.8257862265,
+    //     y: -2.2493996515,
+    //     z: 7.5526914841,
+    //     scrollTrigger: {
+    //       trigger: ".second",
+    //       start: "top bottom",
+    //       end: "top top",
+    //       scrub: true,
+    //       immediateRender: true,
+    //     },
+    //     onUpdate,
+    //   })
+
+    //     .to(".section--one--container", {
+    //       xPercent: "-150",
+    //       opacity: 0,
+    //       scrollTrigger: {
+    //         trigger: ".second",
+    //         start: "top bottom",
+    //         end: "top 80%",
+    //         scrub: 1,
+    //         immediateRender: false,
+    //       },
+    //     })
+    //     .to(target, {
+    //       x: -1.37,
+    //       y: 1.99,
+    //       z: -0.37,
+    //       scrollTrigger: {
+    //         trigger: ".second",
+    //         start: "top bottom",
+    //         end: "top top",
+    //         scrub: true,
+    //         immediateRender: false,
+    //       },
+    //     })
+
+    //     // LAST SECTION
+
+    //     .to(position, {
+    //       x: -3.4,
+    //       y: 9.6,
+    //       z: 1.71,
+    //       scrollTrigger: {
+    //         trigger: ".third",
+    //         start: "top bottom",
+    //         end: "top top",
+    //         scrub: true,
+    //         immediateRender: false,
+    //       },
+    //       onUpdate,
+    //     })
+
+    //     .to(target, {
+    //       x: -1.5,
+    //       y: 2.13,
+    //       z: -0.4,
+    //       scrollTrigger: {
+    //         trigger: ".third",
+    //         start: "top bottom",
+    //         end: "top top",
+    //         scrub: true,
+    //         immediateRender: false,
+    //       },
+    //     });
+    // }
+
+    // -----------------------
     // first section
-    tl.to(position, { x: 5, z: -3, duration: 4, onUpdate });
+    // -----------------------
+
+    tl.to(position, {
+      //   // -----------------------
+      //   // second section
+      //   // -----------------------
+
+      //   .to(position, {
+      x: 3.2097185381,
+      y: -4.0532794149,
+      z: -6.0816965715,
+      scrollTrigger: {
+        trigger: ".second",
+        start: "top bottom",
+        end: "top top",
+        immediateRender: false,
+        scrub: true,
+      },
+      onUpdate,
+    })
+
+      .to(".section--one--container", {
+        xPercent: -150,
+        opacity: 0,
+        scrollTrigger: {
+          trigger: ".second",
+          start: "top bottom",
+          end: "top 80%",
+          immediateRender: false,
+          scrub: 1,
+        },
+      })
+
+      .to(target, {
+        x: -0.5640163703,
+        y: 0.1310943071,
+        z: -0.738582469,
+        scrollTrigger: {
+          trigger: ".second",
+          start: "top bottom",
+          end: "top top",
+          immediateRender: false,
+          scrub: true,
+        },
+      })
+
+      // -----------------------
+      // third section
+      // -----------------------
+
+      .to(position, {
+        x: -2.7201034832,
+        y: -0.4980321668,
+        z: 1.4638919974,
+        scrollTrigger: {
+          trigger: ".third",
+          start: "top bottom",
+          end: "top top",
+          // markers: true,
+          immediateRender: false,
+          scrub: true,
+        },
+        onUpdate,
+      })
+      .to(target, {
+        x: -0.7171929084,
+        y: 1.3947002455,
+        z: -0.4978809638,
+        scrollTrigger: {
+          trigger: ".third",
+          start: "top bottom",
+          end: "top top",
+          // markers: true,
+          immediateRender: false,
+          scrub: true,
+        },
+      });
   }
+
   setupScrollanimation();
 
   // WEBGI UPDATE
@@ -115,7 +263,7 @@ async function setupViewer() {
 
   viewer.addEventListener("preFrame", () => {
     if (needsUpdate) {
-      camera.positionUpdated(false);
+      camera.positionUpdated(true);
       camera.targetUpdated(true);
       needsUpdate = false;
     }
