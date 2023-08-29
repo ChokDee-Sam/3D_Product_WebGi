@@ -101,8 +101,25 @@ async function setupViewer() {
     const tl = gsap.timeline();
 
     // first section
-    tl.to(position, { x: 5, scrollTrigger: { trigger: "second" } });
+    tl.to(position, { x: 5, z: -3, duration: 4, onUpdate });
   }
+  setupScrollanimation();
+
+  // WEBGI UPDATE
+  let needsUpdate = true;
+
+  function onUpdate() {
+    needsUpdate = true;
+    viewer.renderer.resetShadows();
+  }
+
+  viewer.addEventListener("preFrame", () => {
+    if (needsUpdate) {
+      camera.positionUpdated(false);
+      camera.targetUpdated(true);
+      needsUpdate = false;
+    }
+  });
 }
 
 // -----------------------------------------------------------------
