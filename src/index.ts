@@ -91,95 +91,27 @@ async function setupViewer() {
   // Load an environment map if not set in the glb file
   // await viewer.setEnvironmentMap((await manager.importer!.importSinglePath<ITexture>("./assets/environment.hdr"))!);
 
+  //// in case its set to false in the glb
+  viewer.getPlugin(TonemapPlugin)!.config!.clipBackground = true;
+  //// avoid glitchy strangle problem with GSAP big text animation
+  viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: false });
+
   // Add some UI for tweak and testing.
   const uiPlugin = await viewer.addPlugin(TweakpaneUiPlugin);
   // Add plugins to the UI to see their settings.
   uiPlugin.setupPlugins<IViewerPlugin>(TonemapPlugin, CanvasSnipperPlugin);
 
-  //
+  // -----------------------------------------------------------------
+  // -----------------------------------------------------------------
+
   function setupScrollanimation() {
     const tl = gsap.timeline();
 
-    // FIRST SECTION
-
-    //   tl.to(position, {
-    //     x: -3.8257862265,
-    //     y: -2.2493996515,
-    //     z: 7.5526914841,
-    //     scrollTrigger: {
-    //       trigger: ".second",
-    //       start: "top bottom",
-    //       end: "top top",
-    //       scrub: true,
-    //       immediateRender: true,
-    //     },
-    //     onUpdate,
-    //   })
-
-    //     .to(".section--one--container", {
-    //       xPercent: "-150",
-    //       opacity: 0,
-    //       scrollTrigger: {
-    //         trigger: ".second",
-    //         start: "top bottom",
-    //         end: "top 80%",
-    //         scrub: 1,
-    //         immediateRender: false,
-    //       },
-    //     })
-    //     .to(target, {
-    //       x: -1.37,
-    //       y: 1.99,
-    //       z: -0.37,
-    //       scrollTrigger: {
-    //         trigger: ".second",
-    //         start: "top bottom",
-    //         end: "top top",
-    //         scrub: true,
-    //         immediateRender: false,
-    //       },
-    //     })
-
-    //     // LAST SECTION
-
-    //     .to(position, {
-    //       x: -3.4,
-    //       y: 9.6,
-    //       z: 1.71,
-    //       scrollTrigger: {
-    //         trigger: ".third",
-    //         start: "top bottom",
-    //         end: "top top",
-    //         scrub: true,
-    //         immediateRender: false,
-    //       },
-    //       onUpdate,
-    //     })
-
-    //     .to(target, {
-    //       x: -1.5,
-    //       y: 2.13,
-    //       z: -0.4,
-    //       scrollTrigger: {
-    //         trigger: ".third",
-    //         start: "top bottom",
-    //         end: "top top",
-    //         scrub: true,
-    //         immediateRender: false,
-    //       },
-    //     });
-    // }
-
     // -----------------------
-    // first section
+    // Section 1-2
     // -----------------------
 
     tl.to(position, {
-      //   // -----------------------
-      //   // second section
-      //   // -----------------------
-
-      //   .to(position, {
       x: 3.2097185381,
       y: -4.0532794149,
       z: -6.0816965715,
@@ -219,7 +151,7 @@ async function setupViewer() {
       })
 
       // -----------------------
-      // third section
+      // Section 2-3
       // -----------------------
 
       .to(position, {
@@ -265,15 +197,44 @@ async function setupViewer() {
     if (needsUpdate) {
       camera.positionUpdated(true);
       camera.targetUpdated(true);
+      // camera.positionTargetUpdated(true) // deprecié
       needsUpdate = false;
     }
   });
+
+  // SCROLL : Button Hero > Section 2
+  document.querySelector(".button--hero")?.addEventListener("click", () => {
+    const element = document.querySelector(".second");
+    window.scrollTo({
+      top: element?.getBoundingClientRect().top,
+      left: 0,
+      behavior: "smooth",
+    });
+  });
+
+  // SCROLL : to Top
+  document.querySelector(".button--footer")?.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  });
+
+  // CUSTOMIZE
+  const sections = document.querySelector(".container") as HTMLElement;
+  document
+    .querySelector(".button--customize")
+    ?.addEventListener("click", () => {
+      viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: true });
+      sections.style.display = "none";
+    });
 }
 
 // -----------------------------------------------------------------
 // -----------------------------------------------------------------
 
-// ---------- Add plugins individually ----------
+// ---------- ----------
 
 // -----------------------------------------------------------------
 // Appel de la fonction
