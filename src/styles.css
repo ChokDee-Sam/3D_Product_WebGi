@@ -40,7 +40,7 @@ body {
   flex-direction: column;
   align-items: center;
 
-  z-index: 100;
+  /* z-index: 100; */
 }
 
 #webgi-canvas {
@@ -101,7 +101,7 @@ body {
   margin-left: 15%;
 }
 
-.custom--bg {
+/* .custom--bg {
   width: 100%;
   height: 800px;
   background: #f2ce6e;
@@ -112,8 +112,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -100;
-}
+  /* z-index: -100; */
+/* } */
 
 .first h1 {
   font-size: 10rem;
@@ -152,7 +152,7 @@ h2 {
 .custom--bg {
   width: 100%;
   height: 800px;
-  background: #f2ce6e;
+  background: #a0a544;
   -webkit-transform: skew(20deg);
   -moz-transform: skew(20deg);
   -o-transform: skew(20deg);
@@ -177,8 +177,8 @@ h2 {
 }
 
 .button--hero {
-  background: #f2ce6e;
-  color: black;
+  background: black;
+  color: white;
   border: none;
   font-weight: 600;
   border-radius: 50px;
@@ -187,16 +187,19 @@ h2 {
   margin-right: 40px;
   font-size: 0.6rem;
   cursor: pointer;
-  transition: all 0.8s ease;
+  transition: all 0.2s ease;
+  box-shadow: 4px 4px 0px 0px #a0a544;
 }
 .button--hero:hover {
-  background: black;
-  color: white;
+  /* background: #a0a544; */
+  /* color: white; */
+  box-shadow: 0px 10px 0px 0px #a0a544;
+  margin-left: 10px;
 }
 
 .button--customize {
-  background: #f2ce6e;
-  color: black;
+  background: black;
+  color: white;
   border: none;
   font-weight: 600;
   border-radius: 50px;
@@ -205,16 +208,22 @@ h2 {
   margin-right: 40px;
   font-size: 0.6rem;
   cursor: pointer;
-  transition: all 0.8s ease;
+  transition: all 0.2s ease, visibility 0s ease;
+  box-shadow: 4px 4px 0px 0px #a0a544;
 }
-
+.button--customize:hover {
+  box-shadow: 0px 10px 0px 0px #a0a544;
+  margin-left: 10px;
+  /* margin-top: 20px; */
+}
 .button--exit {
-  width: 90px;
+  width: 120px;
   margin-bottom: 5%;
-  z-index: 500;
+  z-index: 5;
   position: fixed;
   bottom: 0;
   visibility: hidden;
+  transition: visibility 0s ease, box-shadow 0.2s ease;
 }
 
 /* ----------------------------------- */
@@ -236,10 +245,54 @@ footer {
   padding: 10px 30px;
   font-size: 0.6rem;
   cursor: pointer;
-  transition: all 0.8s ease;
 }
 
 .button--footer:hover {
   color: black;
   background-color: white;
+}
+
+/* ----------------------------------- */
+/* ---------------- Customizer ------------------- */
+/* ----------------------------------- */
+
+.customizer--container {
+  position: fixed;
+  top: 50%;
+  visibility: hidden;
+  transition: visibility 0s ease;
+}
+
+.button--colors {
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  border: 1px solid white;
+  padding: 0;
+  margin-left: 50px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease, visibility 0s ease;
+}
+.button--colors:hover {
+  transform: scale(1.5);
+  /* filter: drop-shadow(0 0 2px rgba(28, 17, 52, 0.704)); */
+  /* border: 2px solid grey; */
+}
+
+.strap--colors {
+  list-style: none;
+}
+
+.orange {
+  background-color: rgb(220, 125, 29);
+}
+
+.black {
+  background-color: rgb(74, 76, 79);
+  /* background-color: #242627; */
+}
+
+.green {
+  background-color: #3aeb12;
 }

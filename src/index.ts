@@ -25,8 +25,8 @@ import {
   AssetManagerBasicPopupPlugin,
   CanvasSnipperPlugin,
   IViewerPlugin,
-
-  // Color, // Import THREE.js internals
+  MeshBasicMaterial2,
+  Color, // Import THREE.js internals
   // Texture, // Import THREE.js internals
 } from "webgi";
 import "./styles.css";
@@ -50,11 +50,14 @@ async function setupViewer() {
   // ---------- Add some plugins ----------
   const manager = await viewer.addPlugin(AssetManagerPlugin);
 
-  //
+  ///
   const camera = viewer.scene.activeCamera;
   const position = camera.position;
   const target = camera.target;
   const exitButton = document.querySelector(".button--exit") as HTMLElement;
+  const customizerInterface = document.querySelector(
+    ".customizer--container"
+  ) as HTMLElement;
   //
 
   // ---------- Add a popup(in HTML) ----------
@@ -88,6 +91,17 @@ async function setupViewer() {
 
   // Import and add a GLB file.
   await viewer.load("./assets/drill.glb");
+
+  // Va chercher le premier enfant du Physical Material dans notre fichier .glb
+  const drillMaterial = manager.materials!.findMaterialsByName(
+    "Drill_01"
+  )[0] as MeshBasicMaterial2;
+
+  // pour voir le contenu
+  // console.log(drillMaterial);
+
+  // Pour changer la couleur
+  // drillMaterial.color = new Color(0xff0000);
 
   // Load an environment map if not set in the glb file
   // await viewer.setEnvironmentMap((await manager.importer!.importSinglePath<ITexture>("./assets/environment.hdr"))!);
@@ -256,16 +270,19 @@ async function setupViewer() {
       });
 
       function enableControlers() {
-        viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: true });
         exitButton.style.visibility = "visible";
+        customizerInterface.style.visibility = "visible";
+        viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: true });
       }
     });
 
   // EXIT CUSTOMIZE
   exitButton?.addEventListener("click", () => {
+    exitButton.style.visibility = "hidden";
     viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: false });
     sections.style.visibility = "visible";
-    exitButton.style.visibility = "hidden";
+    customizerInterface.style.visibility = "hidden";
+
     mainteContainer.style.pointerEvents = "none";
     mainteContainer.style.cursor = "default";
 
@@ -288,6 +305,36 @@ async function setupViewer() {
       // onComplete: enableControlers // pas besoin
     });
   });
+
+  // -----------------------------------------------------------------
+  // Inside Customizer : change colors
+  // -----------------------------------------------------------------
+
+  function changeColor(_colorToBeChanged: Color) {
+    drillMaterial.color = _colorToBeChanged;
+    viewer.scene.setDirty(); // change la couleur sans avoir à drag
+  }
+
+  document
+    .querySelector(".button--colors.black")
+    ?.addEventListener("click", () => {
+      changeColor(new Color(0x383830));
+    });
+  document
+    .querySelector(".button--colors.green")
+    ?.addEventListener("click", () => {
+      changeColor(new Color(0x95ffa8));
+    });
+
+  document
+    .querySelector(".button--colors.orange")
+    ?.addEventListener("click", () => {
+      let btnCustom = document.querySelector(
+        ".button--customize"
+      ) as HTMLElement;
+      changeColor(new Color(0xff6464));
+      btnCustom.style.background = "0xff6464";
+    });
 }
 
 // -----------------------------------------------------------------
@@ -297,5 +344,6 @@ async function setupViewer() {
 
 // -----------------------------------------------------------------
 // Appel de la fonction
+// changeColor(new Color(0xaf6f6f));0xff9696
 // -----------------------------------------------------------------
 setupViewer();
