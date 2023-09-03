@@ -284,15 +284,14 @@ footer {
   list-style: none;
 }
 
+.green {
+  background-color: #6eb335;
+}
+
 .orange {
-  background-color: rgb(220, 125, 29);
+  background-color: #e06f4c;
 }
 
 .black {
-  background-color: rgb(74, 76, 79);
-  /* background-color: #242627; */
-}
-
-.green {
-  background-color: #3aeb12;
+  background-color: #303d1c;
 }
