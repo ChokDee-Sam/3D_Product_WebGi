@@ -54,6 +54,7 @@ async function setupViewer() {
   const camera = viewer.scene.activeCamera;
   const position = camera.position;
   const target = camera.target;
+  const exitButton = document.querySelector(".button--exit") as HTMLElement;
   //
 
   // ---------- Add a popup(in HTML) ----------
@@ -223,12 +224,70 @@ async function setupViewer() {
 
   // CUSTOMIZE
   const sections = document.querySelector(".container") as HTMLElement;
+  const mainteContainer = document.getElementById(
+    "webgi-canvas-container"
+  ) as HTMLElement;
   document
     .querySelector(".button--customize")
     ?.addEventListener("click", () => {
-      viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: true });
-      sections.style.display = "none";
+      // sections.style.display = "none";
+      sections.style.visibility = "hidden";
+
+      mainteContainer.style.pointerEvents = "all";
+      mainteContainer.style.cursor = "grab";
+
+      gsap.to(position, {
+        x: -0.0147760418,
+        y: -0.8498357795,
+        z: -10.8699141534,
+        duration: 2,
+        // ease: "Power3.inOut",
+        onUpdate,
+      });
+
+      gsap.to(target, {
+        x: 0.6444524075,
+        y: -0.1041311145,
+        z: -0.7308985864,
+        duration: 2,
+        // ease: "Power3.inOut",
+        onUpdate,
+        onComplete: enableControlers,
+      });
+
+      function enableControlers() {
+        viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: true });
+        exitButton.style.visibility = "visible";
+      }
     });
+
+  // EXIT CUSTOMIZE
+  exitButton?.addEventListener("click", () => {
+    viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: false });
+    sections.style.visibility = "visible";
+    exitButton.style.visibility = "hidden";
+    mainteContainer.style.pointerEvents = "none";
+    mainteContainer.style.cursor = "default";
+
+    gsap.to(position, {
+      x: -2.7201034832,
+      y: -0.4980321668,
+      z: 1.4638919974,
+      duration: 1,
+      // ease: "Power3.inOut",
+      onUpdate,
+    });
+
+    gsap.to(target, {
+      x: -0.7171929084,
+      y: 1.3947002455,
+      z: -0.4978809638,
+      duration: 1,
+      // ease: "Power3.inOut",
+      onUpdate,
+      // onComplete: enableControlers // pas besoin
+    });
+  });
 }
 
 // -----------------------------------------------------------------

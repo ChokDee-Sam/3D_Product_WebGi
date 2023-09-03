@@ -34,10 +34,12 @@ body {
   /* pour éviter les mouvements 3D afin de pouvoir scroller */
   pointer-events: none;
   position: fixed;
+
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
   align-items: center;
+
   z-index: 100;
 }
 
@@ -150,7 +152,7 @@ h2 {
 .custom--bg {
   width: 100%;
   height: 800px;
-  background: #b5b75c;
+  background: #f2ce6e;
   -webkit-transform: skew(20deg);
   -moz-transform: skew(20deg);
   -o-transform: skew(20deg);
@@ -209,10 +211,10 @@ h2 {
 .button--exit {
   width: 90px;
   margin-bottom: 5%;
-  z-index: 5;
+  z-index: 500;
   position: fixed;
   bottom: 0;
-  display: none;
+  visibility: hidden;
 }
 
 /* ----------------------------------- */
