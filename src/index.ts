@@ -58,6 +58,7 @@ async function setupViewer() {
   const customizerInterface = document.querySelector(
     ".customizer--container"
   ) as HTMLElement;
+
   //
 
   // ---------- Add a popup(in HTML) ----------
@@ -241,6 +242,7 @@ async function setupViewer() {
   const mainteContainer = document.getElementById(
     "webgi-canvas-container"
   ) as HTMLElement;
+
   document
     .querySelector(".button--customize")
     ?.addEventListener("click", () => {
